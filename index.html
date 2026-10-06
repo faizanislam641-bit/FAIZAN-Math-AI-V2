@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#080303">
+  <meta name="description" content="FAIZAN Math AI Version 2 - Free math image and equation solver">
+  <title>FAIZAN Math AI — Version 2</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Browser-only libraries: no API key or backend required -->
+  <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+  <div class="fx-layer">
+    <div class="red-orb orb-1"></div>
+    <div class="red-orb orb-2"></div>
+    <div class="red-orb orb-3"></div>
+    <div class="particle-field" id="particleField"></div>
+    <div class="formula-field" id="formulaField"></div>
+    <div class="scan-line"></div>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">ƒ</span>
+      <span>FAIZAN <strong>Math AI</strong></span>
+      <small>V2</small>
+    </a>
+    <div class="version-pill"><i></i> AI VERSION 2.0</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-kicker">NEXT-GENERATION MATH SOLVER</div>
+      <h1>Drop the problem.<br><em>Get the answer.</em></h1>
+      <p>
+        Type a mathematical expression or upload a photo of your problem.
+        FAIZAN Math AI reads it, processes it and returns the result directly in your browser.
+      </p>
+    </section>
+
+    <section class="workspace">
+      <div class="workspace-top">
+        <div>
+          <span class="section-label">SOLVER CORE</span>
+          <h2>What do you want to solve?</h2>
+        </div>
+        <span class="live-badge">● LIVE ENGINE</span>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">↑</div>
+        <div>
+          <strong>Drop a math image here</strong>
+          <span>or choose an image from your phone / computer</span>
+        </div>
+        <label class="choose-btn">
+          Choose Image
+          <input id="imageInput" type="file" accept="image/*" capture="environment">
+        </label>
+      </div>
+
+      <div id="previewArea" class="preview-area hidden">
+        <div class="preview-image-wrap">
+          <img id="imagePreview" alt="Math problem preview">
+        </div>
+        <div class="preview-info">
+          <span class="section-label">IMAGE READER</span>
+          <h3 id="ocrTitle">Reading your problem...</h3>
+          <div class="progress"><span id="ocrProgress"></span></div>
+          <p id="ocrStatus">Preparing OCR...</p>
+          <button id="removeImage" class="text-btn" type="button">Remove image</button>
+        </div>
+      </div>
+
+      <div class="divider"><span>OR TYPE IT</span></div>
+
+      <div class="input-card">
+        <textarea id="mathInput" spellcheck="false" placeholder="Example: 9 - 3 ÷ 1/3 + 1"></textarea>
+        <div class="input-bottom">
+          <span>Use <b>^</b> for powers · Example: x^2 - 5x + 6 = 0</span>
+          <select id="variable">
+            <option value="x">x</option>
+            <option value="y">y</option>
+            <option value="z">z</option>
+            <option value="t">t</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="solveBtn" class="solve-btn" type="button">
+          <span>✦</span> Solve Now
+        </button>
+        <button id="clearBtn" class="clear-btn" type="button">Clear</button>
+      </div>
+
+      <div class="quick-row">
+        <span>QUICK TEST</span>
+        <button data-example="9 - 3 / (1/3) + 1">9 − 3 ÷ ⅓ + 1</button>
+        <button data-example="x^2 - 5x + 6 = 0">x² − 5x + 6 = 0</button>
+        <button data-example="derivative(x^3 + 2x, x)">Derivative</button>
+        <button data-example="integrate(x^2, x)">Integral</button>
+      </div>
+
+      <div id="resultPanel" class="result-panel hidden">
+        <div class="answer-head">
+          <div><span class="answer-label">ANSWER</span><h3>Solution found</h3></div>
+          <span class="check">✓</span>
+        </div>
+        <div class="answer-card">
+          <div class="answer-symbol">=</div>
+          <div id="resultText" class="result-text"></div>
+        </div>
+        <div class="answer-note">Calculated automatically from the detected math.</div>
+        <div id="stepsText" class="steps-text hidden"></div>
+        <div id="detectedText" class="detected-text hidden"></div>
+      </div>
+
+      <div id="errorPanel" class="error-panel hidden"></div>
+    </section>
+
+    <section class="capabilities">
+      <div class="cap-title">
+        <span class="section-label">CAPABILITIES</span>
+        <h2>Built for real math problems</h2>
+      </div>
+      <div class="cap-grid">
+        <article><span>01</span><h3>Image → Answer</h3><p>Upload a clear photo and the browser reads the problem automatically.</p></article>
+        <article><span>02</span><h3>Algebra</h3><p>Linear, quadratic, polynomial equations, factoring and symbolic simplification.</p></article>
+        <article><span>03</span><h3>Calculus</h3><p>Derivatives and integrals using a symbolic mathematics engine.</p></article>
+        <article><span>04</span><h3>Trigonometry</h3><p>Work with common trigonometric expressions and identities.</p></article>
+        <article><span>05</span><h3>Mobile Ready</h3><p>Designed for phones, with touch and device-motion background effects.</p></article>
+        <article><span>06</span><h3>Free Core</h3><p>No OpenAI key, database or paid backend is required for this version.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">FAIZAN <span>Math AI</span> <b>V2</b></div>
+    <p>Free Math & Equation Solver</p>
+    <p>Developed by <strong>FAIZAN</strong></p>
+    <small>© 2026 FAIZAN. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
